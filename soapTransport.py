@@ -1,4 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from collections import defaultdict
+
 import requests
 from suds.transport import Transport
 
@@ -11,9 +15,9 @@ except ImportError:
 
 
 class Requests2Transport(Transport):
-    def __init__(self, **kwargs):
-        Transport.__init__(self)
-        self.http = requests.session()
+    def __init__(self, session=None, **kwargs):
+        super(Requests2Transport, self).__init__()
+        self.http = session or requests.session()
         self.default_kw = kwargs
 
     def open(self, request):
